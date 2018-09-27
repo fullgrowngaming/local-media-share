@@ -15,7 +15,6 @@ def open_connection():
     c.send('CAP REQ :twitch.tv/tags\r\n'.encode('utf-8'))
     c.send('CAP REQ :twitch.tv/membership\r\n'.encode('utf-8'))
     c.send('CAP REQ :twitch.tv/commands\r\n'.encode('utf-8'))
-    print("Tags, membership, and commands requests sent")
 
     return c
 
@@ -38,7 +37,6 @@ def join_room(c):
 def send_message(c, message):
     temp_message = "PRIVMSG #" + CHANNEL + " :" + message
     c.send((temp_message + "\r\n").encode('utf-8'))
-    print("Sent: " + temp_message) #remove later
 
 
 def get_user(line):
