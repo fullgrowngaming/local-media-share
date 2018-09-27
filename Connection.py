@@ -1,5 +1,4 @@
 import socket
-import string
 import re
 from Settings import HOST, PORT, PASS, NICK, CHANNEL, PONG
 
