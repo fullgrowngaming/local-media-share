@@ -40,10 +40,13 @@ def send_message(c, message):
 
 
 def get_user(line):
-    name = re.findall(r'display-name=(.*?);', line)
-    if name:
-        return name[0]
-    return None
+    if ' PRIVMSG #' in line:
+        return re.findall(r'display-name=(.*?);', line)[0]
+
+
+def get_message(line):
+    if ' PRIVMSG #' in line:
+        return re.findall(r'#{} :(.*$)'.format(CHANNEL), line)[0]
 
 
 def pong(c):

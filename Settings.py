@@ -1,6 +1,6 @@
 HOST = "irc.twitch.tv"
 PORT = 6667
-PASS = 'oauth:zncv9uk22w2s63jp2x91rn0gy4znys' #this is no longer an active oauth key
+PASS = 'oauth:6ot0mzk0bkifp2vdmsu44aqlroz6m6'
 NICK = 'kylfbot'
 CHANNEL = 'fullgrowngaming'
 PONG = 'PONG :tmi.twitch.tv' + '\r\n'

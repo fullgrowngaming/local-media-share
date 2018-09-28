@@ -10,7 +10,7 @@ while True:
         read_buffer = temp.pop()
 
         for line in temp:
-            print(get_user(line))
+            print(f'{get_user(line)}: {get_message(line)}')
             if 'PING :tmi.twitch.tv' in line:
                 pong(c)
 
