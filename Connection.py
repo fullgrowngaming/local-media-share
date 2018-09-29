@@ -44,11 +44,37 @@ def get_user(line):
 
 
 def get_message(line):
-    return re.findall(fr'#{CHANNEL} :(.*$)', line)[0]
+    temp = line.split(' :')[2]
+    return temp
 
 
 def get_bits(line):
-    return int(re.findall(r';bits=(.*?);', line)[0])
+    temp = line.split(' :')
+    try:
+        return int((re.findall(r';bits=(.*?);', temp[0]))[0])
+    except:
+        return 'fake'
+
+
+def gift_sub_parse(line):
+    sender = re.findall(r'display-name=(.*?);', line)[0]
+    recipient = re.findall(r'msg-param-recipient-display-name=(.*?);', line)[0]
+    total_gift_subs = int(re.findall(r'msg-param-sender-count=(.*?);', line)[0])
+    tier = re.findall(r'msg-param-sub-plan=(.*?);', line)[0]
+    return (sender, recipient, total_gift_subs, tier)
+
+
+def sub_parse(line):
+    subscriber = re.findall(r'display-name=(.*?);', line)[0]
+    tier = re.findall(r'msg-param-sub-plan=(.*?);', line)[0]
+    return (subscriber, tier)
+
+
+def resub_parse(line):
+    subscriber = re.findall(r'display-name=(.*?);', line)[0]
+    duration = re.findall(r'msg-param-months=(.*?);', line)[0]
+    tier = re.findall(r'msg-param-sub-plan=(.*?);', line)[0]
+    return (subscriber, duration, tier)
 
 
 def pong(c):
