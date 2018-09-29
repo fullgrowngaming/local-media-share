@@ -30,7 +30,7 @@ def join_room(c):
             print(line)
             if "End of" in line:
                 print(line)
-                send_message(c, f'joined room: {CHANNEL}')
+                print(f'joined room: {CHANNEL}')
                 loading = False
 
 
@@ -40,13 +40,15 @@ def send_message(c, message):
 
 
 def get_user(line):
-    if ' PRIVMSG #' in line:
-        return re.findall(r'display-name=(.*?);', line)[0]
+    return re.findall(r'display-name=(.*?);', line)[0]
 
 
 def get_message(line):
-    if ' PRIVMSG #' in line:
-        return re.findall(r'#{} :(.*$)'.format(CHANNEL), line)[0]
+    return re.findall(fr'#{CHANNEL} :(.*$)', line)[0]
+
+
+def get_bits(line):
+    return int(re.findall(r';bits=(.*?);', line)[0])
 
 
 def pong(c):

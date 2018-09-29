@@ -10,7 +10,13 @@ while True:
         read_buffer = temp.pop()
 
         for line in temp:
-            print(f'{get_user(line)}: {get_message(line)}')
-            if 'PING :tmi.twitch.tv' in line:
+            if ' PRIVMSG #' in line:
+                #print(f'{get_user(line)}: {get_message(line)}')
+                pass
+                #to-do
+            elif 'PING :tmi.twitch.tv' in line:
                 pong(c)
+            elif ';bits=' in line:
+                print('bit received')
+                print(f'{get_user(line)} cheered {get_bits(line)} bits!')
 
