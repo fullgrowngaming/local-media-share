@@ -1,5 +1,6 @@
 from Connection import *
 from MessageParse import *
+from MediaPlayer import *
 
 c = open_connection()
 join_room(c)
@@ -12,8 +13,9 @@ while True:
 
         for line in temp:
             if ' PRIVMSG #' in line:
-                if ';bits=' in line:
+                if ';bits=' in line and bits_parse(line) != None:
                     print(f'{get_user(line)} cheered {bits_parse(line)} bits!')
+                    play_video(bits_parse(line), url_parse(line))
 
             elif ' USERNOTICE ' in line:
                 if 'msg-id=submysterygift' in line:
@@ -30,8 +32,8 @@ while True:
 
                 if 'msg-id=resub' in line:
                     parsed_resub = resub_parse(line)
-                    print(f'{parsed_resub[0]} just subscribed for {parsed_resub[1]} months in a row!,'
-                          f' (Tier {parsed_resub[2]})')
+                    print(f'{parsed_resub[0]} just subscribed for {parsed_resub[1]} months in a row!'
+                          f' Tier {parsed_resub[2]}')
 
 
             elif 'PING :tmi.twitch.tv' in line:

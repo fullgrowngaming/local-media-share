@@ -14,7 +14,7 @@ def bits_parse(line):
     try:
         return int((re.findall(r';bits=(.*?);', temp[0]))[0])
     except:
-        return 'fake'
+        return None
 
 
 def gift_sub_parse(line):
@@ -33,7 +33,16 @@ def sub_parse(line):
 
 def resub_parse(line):
     subscriber = re.findall(r'display-name=(.*?);', line)[0]
-    duration = re.findall(r'msg-param-months=(.*?);', line)[0]
+    duration = int(re.findall(r'msg-param-months=(.*?);', line)[0])
     tier = re.findall(r'msg-param-sub-plan=(.*?);', line)[0]
     return (subscriber, duration, tier)
+
+
+def url_parse(line):
+    url = re.findall(r'http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?', line)
+    try:
+        return url[0][0]
+    except:
+        print('No URL linked!')
+        return None
 
